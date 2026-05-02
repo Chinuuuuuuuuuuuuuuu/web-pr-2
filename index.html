@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        input {
+            padding: 8px;
+            width: 200px;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h2>User Registration</h2>
+
+<form id="form">
+    Name: <input type="text" id="name" required><br><br>
+    Email: <input type="email" id="email" required><br><br>
+
+    <button type="submit">Submit</button>
+
+    <!-- ✅ NEW BUTTON -->
+    <button type="button" onclick="goToPage()">
+        Show Users Details
+    </button>
+</form>
+
+<p id="msg"></p>
+
+<script>
+// FORM SUBMIT (AJAX + LOCAL STORAGE)
+document.getElementById("form").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+
+    let user = {
+        name: name,
+        email: email
+    };
+
+    // get old data
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+
+    // add new user
+    users.push(user);
+
+    // save again
+    localStorage.setItem("users", JSON.stringify(users));
+
+    // AJAX POST (dummy for assignment)
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "display.html", true);
+    xhr.send(JSON.stringify(user));
+
+    document.getElementById("msg").innerHTML = "Registration Successful!";
+});
+
+// ✅ REDIRECT FUNCTION
+function goToPage() {
+    window.location.href = "display.html";
+}
+</script>
+
+</body>
+</html>
