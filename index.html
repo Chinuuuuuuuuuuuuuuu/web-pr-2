@@ -1,80 +1,68 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Registration</title>
+    <title>Simple Mobile Website</title>
 
-    <style>
-        body {
-            font-family: Arial;
-            text-align: center;
-            margin-top: 50px;
-        }
+    <!-- Mobile responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        input {
-            padding: 8px;
-            width: 200px;
-        }
-
-        button {
-            padding: 10px 15px;
-            margin: 5px;
-            cursor: pointer;
-        }
-    </style>
+    <!-- jQuery + jQuery Mobile CDN -->
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 </head>
+
 <body>
 
-<h2>User Registration</h2>
+<!-- PAGE 1 -->
+<div data-role="page" id="home">
 
-<form id="form">
-    Name: <input type="text" id="name" required><br><br>
-    Email: <input type="email" id="email" required><br><br>
+    <!-- Header -->
+    <div data-role="header">
+        <h1>My Mobile App</h1>
+    </div>
 
-    <button type="submit">Submit</button>
+    <!-- Content -->
+    <div role="main" class="ui-content">
+        <p>Welcome to my mobile website</p>
 
-    <!-- ✅ NEW BUTTON -->
-    <button type="button" onclick="goToPage()">
-        Show Users Details
-    </button>
-</form>
+        <!-- Button -->
+        <a href="#about" data-role="button">Go to About Page</a>
 
-<p id="msg"></p>
+        <!-- List -->
+        <ul data-role="listview">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </div>
 
-<script>
-// FORM SUBMIT (AJAX + LOCAL STORAGE)
-document.getElementById("form").addEventListener("submit", function(e){
-    e.preventDefault();
+    <!-- Footer -->
+    <div data-role="footer">
+        <h4>Footer Section</h4>
+    </div>
 
-    let name = document.getElementById("name").value;
-    let email = document.getElementById("email").value;
+</div>
 
-    let user = {
-        name: name,
-        email: email
-    };
+<!-- PAGE 2 -->
+<div data-role="page" id="about">
 
-    // get old data
-    let users = JSON.parse(localStorage.getItem("users")) || [];
+    <div data-role="header">
+        <h1>About</h1>
+    </div>
 
-    // add new user
-    users.push(user);
+    <div role="main" class="ui-content">
+        <p>This is second page 📱</p>
 
-    // save again
-    localStorage.setItem("users", JSON.stringify(users));
+        <!-- Back Button -->
+        <a href="#home" data-role="button">Go Back</a>
+    </div>
 
-    // AJAX POST (dummy for assignment)
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", "display.html", true);
-    xhr.send(JSON.stringify(user));
+    <div data-role="footer">
+        <h4>About Footer</h4>
+    </div>
 
-    document.getElementById("msg").innerHTML = "Registration Successful!";
-});
-
-// ✅ REDIRECT FUNCTION
-function goToPage() {
-    window.location.href = "display.html";
-}
-</script>
+</div>
 
 </body>
 </html>
